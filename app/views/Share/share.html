@@ -1,0 +1,29 @@
+<h2>Partager les recettes que vous aimez !</h2>
+<section class="connected" id="add-liked" style="display:none;">
+   #{form @Reco.addLiked(), ,id:'add-liked-form'}
+   <fieldset>
+      <legend>Ajouter une recette à partager :</legend>
+      <div>
+         <p>
+            <label for="add-liked-input-name">Nom : </label>
+            <input maxlength="100" type="text" id="add-liked-input-name" name="liked.name"
+                   value="${flash.addLikedName}" required/>
+         </p>
+
+         <p>
+            <label for="add-liked-input-description">Recette : </label>
+            <textarea type="text" id="add-liked-input-description" name="liked.description"
+                      value="${flash.addLikeddescription}" required></textarea>
+
+         <p>
+            <button id="add-liked-button" type="submit" name="submit">Add</button>
+      </div>
+      <div id="add-liked-error" style="display: none;" class="errorbox">
+         Sorry, I can't add that.
+      </div>
+   </fieldset>
+   #{/form}
+</section>
+<section class="not-connected" id="add-liked" style="display:none;">
+    <p>Pour partager une recette, vous devez être connecté.</p>
+</section>

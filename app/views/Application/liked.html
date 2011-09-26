@@ -1,0 +1,41 @@
+<section id="liked-section" style="display:none;">
+   <article>
+      <h2 id="liked-name">${liked.name}</h2>
+
+      <p id="liked-description">${liked.description}</p>
+   </article>
+   <p><a class='connected' id='like-button' href='#'></a>
+      <a class='connected' id='ignore-button' href='#'></a></p>
+
+</section>
+
+<script type="text/javascript">
+   require(["jquery", "widgets/login", "widgets/twostatesbutton", "utils"], function($, Login, TwoStatesButton, Utils) {
+      $(document).ready(function() {
+         $('#liked-description').html(Utils.linkify($('#liked-description').text()));
+         $('#liked-section').show();
+         $('title').text('Marmite - ' + $('#liked-name').text())
+
+         #{if liked.liked != null}
+         var liked = ${liked.liked};
+         #{/if}
+         #{else}
+         var liked = 'undefined';
+         #{/else}
+         #{if liked.ignored != null}
+         var ignored = ${liked.ignored};
+         #{/if}
+         #{else}
+         var ignored = 'undefined';
+         #{/else}
+
+
+         TwoStatesButton.Instance('like-button', 'unlike', 'like', '@{Reco.switchLike()}', {likedId:${liked.id}}, 'liked', liked, 'likebutton' + '${liked.id}');
+         TwoStatesButton.Instance('ignore-button', 'unignore', 'ignore', '@{Reco.switchIgnore()}', {likedId:${liked.id}}, 'ignored', ignored, 'likebutton' + '${liked.id}');
+
+
+      })
+
+      onLoadPage.execute({pageSize:"5", startIndex:"1", likedId:${liked.id}});
+   })
+</script>

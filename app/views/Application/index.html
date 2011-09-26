@@ -1,0 +1,71 @@
+#{extends 'site.html' /}
+#{set title:'Ma Marmite - Recommendation de recettes' /}
+
+<section id="lists">
+   <aside id="search">
+      <form id="search-form" method="post" action="#">
+         <fieldset>
+            <legend>Recherche</legend>
+            <div>
+               <label for="search-input">Recette : </label><input type="text" id="search-input" name="search-input"
+                                                                value="${flash.search}" required/>
+               <button id="search-button" type="submit" name="submit">Search</button>
+            </div>
+         </fieldset>
+      </form>
+
+   </aside>
+
+   <aside id="search-results" style="display:none;"><h4>Search results :</h4>
+
+      <div class="list" id="search-results-list"></div>
+      <a id="search-results-list-prev" href="#">prev</a>
+      <a id="search-results-list-next" href="#">next</a>
+   </aside>
+
+   <aside>
+      <h4>Recettes que vous devriez aimer :</h4>
+      <a class="connected" id="user-recommendations-refresh" href="#">refresh</a>
+
+      <div class="connected list" id="user-recommendations"></div>
+      <div class="not-connected list">
+         <p>To get personnal recommendations, based on what you like, please signin</p>
+      </div>
+
+      <a id="user-recommendations-prev" href="#">prev</a>
+      <a id="user-recommendations-next" href="#">next</a>
+   </aside>
+
+</section>
+
+<section id="page_content" class="content">
+   <!-- home is automatically load in main.js via load function -->
+</section>
+
+<script type="text/javascript">
+   require(["jquery", "widgets/likedlist", "widgets/likedaddbox", "widgets/login"], function($, LikedList, LikedAddBox, Login) {
+
+      $(document).ready(function() {
+         $('#search-button').click(function(e) {
+            e.preventDefault();
+            $('#search-results').show();
+            var searchText = $('#search-input').val();
+            LikedList.Instance('search-results-list', '@{Application.search()}', {pageSize:"5", startIndex:"1", text: searchText}, '@{Reco.isLiked()}', '@{Reco.switchLike()}');
+         });
+
+         var likedPageUrl = #{jsAction @Application.liked(':likedId') /};
+
+         var onConnectedUser = function(username) {
+            Login.withConnectedUserDefault(username);
+            var userRecommendations = LikedList.Instance('user-recommendations', '@{Reco.recommendUser()}', {pageSize:"5", startIndex:"1"}, '@{Reco.isLiked()}', '@{Reco.switchLike()}');
+            var likedAddBox = new LikedAddBox.Instance('add-liked', '@{Reco.addLiked()}');
+            likedAddBox.onLikedAdded.add(function(newLiked) {
+               $.history.load(likedPageUrl({likedId: newLiked.id}));
+            });
+         }
+
+         Login.init('@{Security.userName()}', onConnectedUser);
+
+      });
+   });
+</script>

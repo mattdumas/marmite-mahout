@@ -1,0 +1,58 @@
+/* Reset
+* {
+    margin: 0;
+    padding: 0;
+} */
+
+.clear {
+   clear: both;
+   display: block;
+   margin: 0;
+   padding: 0;
+}
+
+section {
+   margin: 20px;
+}
+
+section#page, div.list {
+   margin: 0;
+   padding: 0;
+}
+
+section#page {
+   display:block;
+}
+
+section#lists, header aside#welcome, header aside#login {
+   float: right;
+}
+
+section#lists {
+   width: 45%;
+}
+
+section#page_content, header nav#menu {
+   float: left;
+   width: 45%;
+}
+
+form {
+
+}
+
+form label {
+   display: block;
+   font-weight: bold;
+   padding-top: 10px;
+}
+
+form textarea {
+   width: 600px;
+}
+
+form input {
+   width: 300px;
+}
+
+
