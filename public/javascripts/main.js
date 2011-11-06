@@ -32,7 +32,7 @@ require(["jquery", "utils", "jquery.history", "openid-jquery", "functional"], fu
       Functional.install();
 
       $.history.init(function(url) {
-         load(url == "" ? "/home" : url);
+         load(url == "" ? "/share/share" : url);
       },
       { unescape: "/,&!" });
 

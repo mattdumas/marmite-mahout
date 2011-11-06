@@ -1,46 +1,52 @@
 #{extends 'site.html' /}
 #{set title:'Ma Marmite - Recommendation de recettes' /}
 
-<section id="lists">
-   <aside id="search">
-      <form id="search-form" method="post" action="#">
-         <fieldset>
-            <legend>Recherche</legend>
-            <div>
-               <label for="search-input">Recette : </label><input type="text" id="search-input" name="search-input"
-                                                                value="${flash.search}" required/>
-               <button id="search-button" type="submit" name="submit">Search</button>
-            </div>
-         </fieldset>
-      </form>
+<div class="hero-unit">
+   <h1>Recommandation de recettes</h1>
 
-   </aside>
 
-   <aside id="search-results" style="display:none;"><h4>Search results :</h4>
+   <p class="not-connected" style="display:none;">
+      Vous devez être connecté pour partager vos recettes préférées et obtenir de nouvelle recettes à tester !
+   </p>
+
+   <p class="connected" style="display:none;">
+      <a class="histolink btn primary large" href="@{Share.share()}">Partagez vos recettes préférées</a> ou ajoutez des recettes existantes à vos recettes favoris.
+   </p>
+</div>
+
+<section id="page_content" class="content">
+   <!-- home is automatically load in main.js via load function -->
+</section>
+
+<aside id="search">
+
+
+</aside>
+
+<section id="lists" class="row">
+
+   <aside id="search-results" class="span-one-two" style="display:none;"><h4>Search results :</h4>
 
       <div class="list" id="search-results-list"></div>
       <a id="search-results-list-prev" href="#">prev</a>
       <a id="search-results-list-next" href="#">next</a>
    </aside>
 
-   <aside>
-      <h4>Recettes que vous devriez aimer :</h4>
+   <aside class="span-one-two">
+      <h4>La marmite vous recommande :</h4>
       <a class="connected" id="user-recommendations-refresh" href="#">refresh</a>
 
       <div class="connected list" id="user-recommendations"></div>
       <div class="not-connected list">
-         <p>To get personnal recommendations, based on what you like, please signin</p>
+         <p>Pour obtenir des recommandations, authentifiez-vous !</p>
       </div>
 
-      <a id="user-recommendations-prev" href="#">prev</a>
-      <a id="user-recommendations-next" href="#">next</a>
+      <a id="user-recommendations-prev" href="#">&lt;&lt;</a>
+      <a id="user-recommendations-next" href="#">&gt;&gt;</a>
    </aside>
 
 </section>
 
-<section id="page_content" class="content">
-   <!-- home is automatically load in main.js via load function -->
-</section>
 
 <script type="text/javascript">
    require(["jquery", "widgets/likedlist", "widgets/likedaddbox", "widgets/login"], function($, LikedList, LikedAddBox, Login) {

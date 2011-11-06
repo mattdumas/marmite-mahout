@@ -22,12 +22,4 @@ public class ApplicationTest extends ControllersTest {
       assertContentType("text/html", response);
       assertCharset("utf-8", response);
    }
-
-   @Test
-   public void testHomePageWorks() {
-      Response response = GET("/home");
-      assertIsOk(response);
-      assertContentType("text/html", response);
-      assertCharset("utf-8", response);
-   }
 }

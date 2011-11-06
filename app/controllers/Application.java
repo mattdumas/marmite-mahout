@@ -22,10 +22,6 @@ public class Application extends Controller {
       render();
    }
 
-   public static void home() {
-      render();
-   }
-
    public static void liked(Long id) {
       Liked liked = findLiked(id);
       if (liked == null) {
