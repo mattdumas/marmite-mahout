@@ -109,16 +109,6 @@ public class Secure extends Controller {
    public static class Security extends Controller {
 
       /**
-       * @Deprecated
-       * @param username
-       * @param password
-       * @return
-       */
-      static boolean authentify(String username, String password) {
-         throw new UnsupportedOperationException();
-      }
-
-      /**
        * This method is called during the authentication process. This is where you check if the user is allowed to log in into the system. This is the actual
        * authentication process against a third party system (most of the time a DB).
        * 

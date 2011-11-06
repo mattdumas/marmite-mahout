@@ -2,6 +2,7 @@ package models;
 
 
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import org.junit.Before;
@@ -27,6 +28,8 @@ public class LikedTest extends UnitTest {
       iDontLike.id = 2l;
       likedList.add(iLike);
       likedList.add(iDontLike);
+      user.likedList = new ArrayList();
+      user.likedList.add(iLike);
 
    }
 
@@ -38,7 +41,7 @@ public class LikedTest extends UnitTest {
          if (liked.getId() == 1l) {
             assertTrue(liked.liked);
          } else {
-            assertEquals(false, (boolean) liked.liked);
+            assertEquals(false, liked.liked);
          }
       }
    }

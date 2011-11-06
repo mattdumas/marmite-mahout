@@ -11,7 +11,11 @@ Installation
 * Install Play! Framework 1.2.x http://www.playframework.com
 * clone this repository
 - run `play dependencies` to update dependencies
-- run `play start` on application root directory and that's all :)
+- run `play run` on application root directory
+
+Tips
+--------
+* Make data persistant : change db=mem to db=fs on application.conf
 
 
 

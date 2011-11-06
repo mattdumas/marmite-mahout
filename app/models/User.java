@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import play.Logger;
@@ -20,7 +22,7 @@ public class User extends Model {
    @Email
    public String email;
 
-   @OneToMany
+   @ManyToMany
    public Collection<Liked> likedList;
 
    public User(Long id) {

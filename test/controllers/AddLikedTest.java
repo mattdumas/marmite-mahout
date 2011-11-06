@@ -40,7 +40,7 @@ public class AddLikedTest extends ControllersTest {
       assertIsOk(response);
       assertContentType("application/json", response);
       assertCharset("utf-8", response);
-      assertContentEquals("{\"name\":\"fakename\",\"description\":\"fakedescription\",\"liked\":true,\"ignored\":false,\"like\":1,\"ignore\":0,\"id\":1}", response);
+      assertContentEquals("{\"name\":\"fakename\",\"description\":\"fakedescription\",\"liked\":true,\"id\":1}", response);
    }
 
    @Test

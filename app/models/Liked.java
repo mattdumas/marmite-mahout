@@ -41,7 +41,7 @@ public class Liked extends Model {
 
    public static Liked fill(Liked liked, User user) {
       if (user != null) {
-         liked.liked = user.likedList.contains(liked);
+         liked.liked =  user.likedList!=null && user.likedList.contains(liked);
       }
       return liked;
    }

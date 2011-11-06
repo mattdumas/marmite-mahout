@@ -22,17 +22,8 @@
          #{else}
          var liked = 'undefined';
          #{/else}
-         #{if liked.ignored != null}
-         var ignored = ${liked.ignored};
-         #{/if}
-         #{else}
-         var ignored = 'undefined';
-         #{/else}
-
 
          TwoStatesButton.Instance('like-button', 'unlike', 'like', '@{Reco.switchLike()}', {likedId:${liked.id}}, 'liked', liked, 'likebutton' + '${liked.id}');
-         TwoStatesButton.Instance('ignore-button', 'unignore', 'ignore', '@{Reco.switchIgnore()}', {likedId:${liked.id}}, 'ignored', ignored, 'likebutton' + '${liked.id}');
-
 
       })
 
