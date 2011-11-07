@@ -40,16 +40,38 @@ Etape 1
 Comme tout programmeur qui se respecte, nous allons commencer par écrire un test unitaire.
 
 * Ouvrez la classe BasicTest
-* Analyser le test : testRecommendation() et compléter les 4 lignes commentées avec le résultat que vous espérez.
+* Analyser le test : testRecommendation() et compléter les 4 lignes commentées avec le résultat que vous paraît le plus logique.
 (Les autres tests sont là pour vous aider et ne nécessite pas de modification.)
 
 
-Etape X
+Etape 2
+----------------
+Maintenant il s'agit de faire passer le test que nous venons d'écrire !
+Pour cela, nous allons écrire le corps de la méthode Reco._internalRecommend
+
+* Apache mahout propose l'interface : org.apache.mahout.cf.taste.recommender.Recommender
+ainsi que de nombreuses implementation listées dans le package : org.apache.mahout.cf.taste.impl.recommender
+
+* Choisissez celle qui vous semble la plus adaptées à votre test et tester !
+
+* Vous aurez besoin de contruire un objet org.apache.mahout.cf.taste.model.DataModel à partir des données :
+regardez les implémentations fournies dans le package : org.apache.mahout.cf.taste.impl.model
+
+Etape 3
+----------------
+* Lancer `play autotest` pour vérifier que tous les tests unitaire passent
+* Aller sur le site, taper F5 pour rafraichir la page
+* Saisissez plusieurs recettes avec plusieurs utilisateurs différents
+* Vous devrier voir des recommendations de recettes qui correspondent au gout de l'utilisateur connecté.
+
+Etape 4
 ----------------
 Bravo ! Maintenant passons au niveau supérieur et implementons une système de recommandation d'utilisateur. Le but et de
 proposer des utilisateurs qui ont les mêmes goût que l'utilisateur connecté.
 
-Premièrement, écrivez un test unitaire comme nous l'avons fait pour l'étape 1.
+* Ecrivez un test unitaire comme nous l'avons fait pour l'étape 1.
+* implementez le controleur sur le même modèle que Reco._internalRecommend
+* C'est fini ! Vous pouvez vous amuser à écrire la partie web cliente si il vous reste du temps et du courage !
 
 
 Tips
@@ -58,6 +80,7 @@ Tips
 * Vous pouvez vous inspirer des fichiers .bashrc et .gitconfig ici : https://github.com/jblemee/config
 pour avoir un meilleur environnement de dévellopement sous git
 * pour lancer les tests play! `play autotest`
+* En cas de blocage : allez sur github et regardez la liste des commits, certains sont libellés "Etapes X" et vous donnerons la solution.
 
 
 

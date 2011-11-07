@@ -106,10 +106,8 @@ public class Reco extends Controller {
    }
 
    public static List<RecommendedItem> _internalRecommend(int howMany, Long userId, FastByIDMap<PreferenceArray> usersData) throws TasteException {
-      RecommenderBuilder recommenderBuilder = new CrossingBooleanRecommenderBuilder();
-      DataModel trainingModel = new CrossingDataModelBuilder().buildDataModel(usersData);
-      Recommender recommender = recommenderBuilder.buildRecommender(trainingModel);
-      return recommender.recommend(userId, howMany, null);
+      /* return recommender.recommend(...); */
+      return null;
    }
 
    static FastByIDMap<PreferenceArray> usersData(int limit) {

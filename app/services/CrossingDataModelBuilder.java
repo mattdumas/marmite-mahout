@@ -9,7 +9,7 @@ import org.apache.mahout.cf.taste.model.PreferenceArray;
 public final class CrossingDataModelBuilder implements DataModelBuilder {
 
   public DataModel buildDataModel(FastByIDMap<PreferenceArray> trainingData) {
-    return new GenericBooleanPrefDataModel(GenericBooleanPrefDataModel.toDataMap(trainingData));
+    return null; /* new YourChoiceDataModel(YouChoiceImpl.toDataMap(trainingData));*/
   }
 
 }

@@ -43,7 +43,7 @@ public final class CrossingRecommender implements Recommender {
   public CrossingRecommender(DataModel bcModel) throws TasteException {
     UserSimilarity similarity = new CachingUserSimilarity(new EuclideanDistanceSimilarity(bcModel), bcModel);
     UserNeighborhood neighborhood = new NearestNUserNeighborhood(10, 0.2, similarity, bcModel, 0.2);
-    recommender = new GenericUserBasedRecommender(bcModel, neighborhood, similarity);
+    recommender = null;/* new YourChoiceRecommender(bcModel, neighborhood, similarity);  */
   }
   
   public List<RecommendedItem> recommend(long userID, int howMany) throws TasteException {
