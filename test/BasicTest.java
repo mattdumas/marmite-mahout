@@ -25,6 +25,11 @@ import services.CrossingRecommenderBuilder;
 public class BasicTest extends UnitTest {
 
    private static final Logger log = LoggerFactory.getLogger(BasicTest.class);
+   public static final long USER_1 = 0l;
+   public static final long UNKNOW_USER = 123l;
+   public static final long USER_10 = 10l;
+   public static final long USER_11 = 11l;
+   public static final long USER_12 = 12l;
 
    @Test
    public void testOne() throws TasteException {
@@ -61,39 +66,40 @@ public class BasicTest extends UnitTest {
    @Test
    public void testRecommendation() throws TasteException {
       int howMany = 4;
-      List<RecommendedItem> recommendation = Reco._internalRecommend(howMany, 0l, usersData());
+      List<RecommendedItem> recommendation = Reco._internalRecommend(howMany, USER_1, usersData());
       assertTrue(recommendation.size() <= howMany);
-      assertEquals(ITEM_9, (Long) recommendation.get(0).getItemID());
-      assertEquals(ITEM_7, (Long) recommendation.get(1).getItemID());
-      assertEquals(ITEM_6, (Long) recommendation.get(2).getItemID());
-      assertEquals(ITEM_11, (Long) recommendation.get(3).getItemID());
+      /*assertEquals(ITEM_?, (Long) recommendation.get(0).getItemID());
+      assertEquals(ITEM_?, (Long) recommendation.get(1).getItemID());
+      assertEquals(ITEM_?, (Long) recommendation.get(2).getItemID());
+      assertEquals(ITEM_?, (Long) recommendation.get(3).getItemID());*/
+      fail();
    }
 
    @Test
    public void testNewUserNotInData() throws TasteException {
       int howMany = 4;
-      List<RecommendedItem> recommendation = Reco._internalRecommend(howMany, 123l, usersData());
+      List<RecommendedItem> recommendation = Reco._internalRecommend(howMany, UNKNOW_USER, usersData());
       assertTrue(recommendation.size() == 0);
    }
 
    @Test
    public void testNewUserInData() throws TasteException {
       int howMany = 4;
-      List<RecommendedItem> recommendation = Reco._internalRecommend(howMany, 10l, usersData());
+      List<RecommendedItem> recommendation = Reco._internalRecommend(howMany, USER_10, usersData());
       assertTrue(recommendation.size() == 0);
    }
 
    @Test
    public void testUserWithOnlyOnePref() throws TasteException {
       int howMany = 4;
-      List<RecommendedItem> recommendation = Reco._internalRecommend(howMany, 11l, usersData());
+      List<RecommendedItem> recommendation = Reco._internalRecommend(howMany, USER_11, usersData());
       assertTrue(recommendation.size() == howMany);
    }
 
    @Test
    public void testUserWithOnlyOneUniquePref() throws TasteException {
       int howMany = 4;
-      List<RecommendedItem> recommendation = Reco._internalRecommend(howMany, 12l, usersData());
+      List<RecommendedItem> recommendation = Reco._internalRecommend(howMany, USER_12, usersData());
       assertTrue(recommendation.size() == 0);
    }
 
@@ -114,7 +120,7 @@ public class BasicTest extends UnitTest {
 
       // User 0
       BooleanUserPreferenceArray preferenceArray = new BooleanUserPreferenceArray(5);
-      Long userId = 0l;
+      Long userId = USER_1;
       preferenceArray.setUserID(0, userId);
       preferenceArray.setItemID(0, ITEM_1);
       preferenceArray.setItemID(1, ITEM_2);
@@ -227,20 +233,20 @@ public class BasicTest extends UnitTest {
 
       // User 10
       preferenceArray = new BooleanUserPreferenceArray(0);
-      userId = 10l;
+      userId = USER_10;
       preferenceArray.setUserID(0, userId);
       result.put(userId, preferenceArray);
 
       // User 11
       preferenceArray = new BooleanUserPreferenceArray(1);
-      userId = 11l;
+      userId = USER_11;
       preferenceArray.setUserID(0, userId);
       preferenceArray.setItemID(0, ITEM_1);
       result.put(userId, preferenceArray);
 
       // User 12 // no one as this pref
       preferenceArray = new BooleanUserPreferenceArray(1);
-      userId = 12l;
+      userId = USER_12;
       preferenceArray.setUserID(0, userId);
       preferenceArray.setItemID(0, 999l);
       result.put(userId, preferenceArray);
