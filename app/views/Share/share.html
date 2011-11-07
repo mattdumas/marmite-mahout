@@ -1,22 +1,32 @@
-<h2>Partager les recettes que vous aimez !</h2>
+<h1>Partager
+   <small>les recettes que vous aimez</small>
+</h1>
 <section class="connected" id="add-liked" style="display:none;">
    #{form @Reco.addLiked(), ,id:'add-liked-form'}
    <fieldset>
-      <legend>Ajouter une recette à partager :</legend>
-      <div>
-         <p>
-            <label for="add-liked-input-name">Nom : </label>
-            <input maxlength="100" type="text" id="add-liked-input-name" name="liked.name"
-                   value="${flash.addLikedName}" required/>
-         </p>
+      <legend>Ajouter une recette</legend>
+      <div class="clearfix">
+         <label for="add-liked-input-name">Nom : </label>
 
-         <p>
-            <label for="add-liked-input-description">Recette : </label>
-            <textarea type="text" id="add-liked-input-description" name="liked.description"
+         <div class="input">
+
+            <input class="xlarge" maxlength="100" type="text" id="add-liked-input-name" name="liked.name"
+                   value="${flash.addLikedName}" required/>
+         </div>
+      </div>
+
+      <div class="clearfix">
+         <label for="add-liked-input-description">Recette : </label>
+
+         <div class="input">
+
+            <textarea class="xxlarge" type="text" id="add-liked-input-description" name="liked.description"
                       value="${flash.addLikeddescription}" required></textarea>
 
-         <p>
-            <button id="add-liked-button" type="submit" name="submit">Add</button>
+         </div>
+      </div>
+      <div class="actions">
+         <input id="add-liked-button" type="submit" class="btn primary" value="Save changes">
       </div>
       <div id="add-liked-error" style="display: none;" class="errorbox">
          Sorry, I can't add that.
@@ -25,5 +35,5 @@
    #{/form}
 </section>
 <section class="not-connected" id="add-liked" style="display:none;">
-    <p>Pour partager une recette, vous devez être connecté.</p>
+   <p>Pour partager une recette, vous devez être connecté.</p>
 </section>

@@ -10,42 +10,38 @@
    </p>
 
    <p class="connected" style="display:none;">
-      <a class="histolink btn primary large" href="@{Share.share()}">Partagez vos recettes préférées</a> ou ajoutez des recettes existantes à vos recettes favoris.
+      <a class="histolink btn primary large" href="@{Share.share()}">Partagez vos recettes préférées</a> ou ajoutez des
+      recettes existantes à vos recettes favoris.
    </p>
 </div>
 
-<section id="page_content" class="content">
+
+<aside id="search-results" class="row span16" style="display:none;">
+   <h1>Recherche de recettes</h1>
+
+   <div class="list" id="search-results-list"></div>
+   <a id="search-results-list-prev" href="#">prev</a>
+   <a id="search-results-list-next" href="#">next</a>
+</aside>
+
+<section id="page_content" class="row span16 content">
    <!-- home is automatically load in main.js via load function -->
 </section>
 
-<aside id="search">
+<aside id="recos" class="row span16">
+   <h1>Trouver
+      <small>des recettes que vous aimerez</small>
+   </h1>
+   <a class="connected" id="user-recommendations-refresh" href="#">refresh</a>
 
+   <div class="connected list" id="user-recommendations"></div>
+   <div class="not-connected list">
+      <p>Pour obtenir des recommandations, authentifiez-vous !</p>
+   </div>
 
+   <a id="user-recommendations-prev" href="#">&lt;&lt;</a>
+   <a id="user-recommendations-next" href="#">&gt;&gt;</a>
 </aside>
-
-<section id="lists" class="row">
-
-   <aside id="search-results" class="span-one-two" style="display:none;"><h4>Search results :</h4>
-
-      <div class="list" id="search-results-list"></div>
-      <a id="search-results-list-prev" href="#">prev</a>
-      <a id="search-results-list-next" href="#">next</a>
-   </aside>
-
-   <aside class="span-one-two">
-      <h4>La marmite vous recommande :</h4>
-      <a class="connected" id="user-recommendations-refresh" href="#">refresh</a>
-
-      <div class="connected list" id="user-recommendations"></div>
-      <div class="not-connected list">
-         <p>Pour obtenir des recommandations, authentifiez-vous !</p>
-      </div>
-
-      <a id="user-recommendations-prev" href="#">&lt;&lt;</a>
-      <a id="user-recommendations-next" href="#">&gt;&gt;</a>
-   </aside>
-
-</section>
 
 
 <script type="text/javascript">
@@ -57,6 +53,7 @@
             $('#search-results').show();
             var searchText = $('#search-input').val();
             LikedList.Instance('search-results-list', '@{Application.search()}', {pageSize:"5", startIndex:"1", text: searchText}, '@{Reco.isLiked()}', '@{Reco.switchLike()}');
+            window.location = "#search-results"
          });
 
          var likedPageUrl = #{jsAction @Application.liked(':likedId') /};
