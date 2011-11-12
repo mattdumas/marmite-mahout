@@ -26,7 +26,7 @@ rechercher les recettes saisies par l'utilisateur connecté ou les autres utilis
 
 * Connectez vous (vous devez avoir un compte google)
 * Ajoutez une ou plusieurs recettes
-* Recherchez un recette.
+* Recherchez une recette.
 
 Nous allons améliorer le site pour découvrir de nouvelles recettes en fonction de nos goûts.
 
