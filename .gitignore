@@ -15,6 +15,5 @@
 *.pmd
 *.iws
 *.ser
-*db/*
 *tmp/*
 *modules/*
