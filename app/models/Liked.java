@@ -1,14 +1,14 @@
 package models;
 
-import java.util.Collection;
-
-import javax.persistence.Entity;
-import javax.persistence.Transient;
-
 import play.data.validation.MaxSize;
 import play.data.validation.MinSize;
 import play.data.validation.Required;
 import play.db.jpa.Model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
+import java.util.Collection;
 
 /**
  * @author Jean-Baptiste Lemée
@@ -21,7 +21,7 @@ public class Liked extends Model {
    @MaxSize(100)
    public String name;
 
-   @MaxSize(255)
+   @Column(length=4096)
    @Required
    public String description;
 
