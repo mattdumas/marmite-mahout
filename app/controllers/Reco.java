@@ -11,21 +11,16 @@ import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.mahout.cf.taste.common.TasteException;
-import org.apache.mahout.cf.taste.eval.RecommenderBuilder;
 import org.apache.mahout.cf.taste.impl.common.FastByIDMap;
 import org.apache.mahout.cf.taste.impl.model.BooleanUserPreferenceArray;
-import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.model.PreferenceArray;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
-import org.apache.mahout.cf.taste.recommender.Recommender;
 
 import models.Liked;
 import models.User;
 import play.Logger;
 import play.mvc.Controller;
 import play.mvc.With;
-import services.CrossingBooleanRecommenderBuilder;
-import services.CrossingDataModelBuilder;
 import services.SearchService;
 import utils.paging.Paging;
 

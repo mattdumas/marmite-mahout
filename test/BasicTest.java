@@ -1,67 +1,19 @@
-import java.util.List;
-
+import controllers.Reco;
 import org.apache.mahout.cf.taste.common.TasteException;
-import org.apache.mahout.cf.taste.eval.IRStatistics;
-import org.apache.mahout.cf.taste.eval.RecommenderEvaluator;
-import org.apache.mahout.cf.taste.eval.RecommenderIRStatsEvaluator;
 import org.apache.mahout.cf.taste.impl.common.FastByIDMap;
-import org.apache.mahout.cf.taste.impl.eval.AverageAbsoluteDifferenceRecommenderEvaluator;
-import org.apache.mahout.cf.taste.impl.eval.GenericRecommenderIRStatsEvaluator;
 import org.apache.mahout.cf.taste.impl.model.BooleanUserPreferenceArray;
-import org.apache.mahout.cf.taste.impl.model.GenericDataModel;
-import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.model.PreferenceArray;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import controllers.Reco;
 import play.test.UnitTest;
-import services.CrossingBooleanRecommenderBuilder;
-import services.CrossingDataModelBuilder;
-import services.CrossingRecommenderBuilder;
+
+import java.util.List;
 
 public class BasicTest extends UnitTest {
 
    private static final Logger log = LoggerFactory.getLogger(BasicTest.class);
-   public static final long USER_1 = 0l;
-   public static final long UNKNOW_USER = 123l;
-   public static final long USER_10 = 10l;
-   public static final long USER_11 = 11l;
-   public static final long USER_12 = 12l;
-
-   @Test
-   public void testOne() throws TasteException {
-      RecommenderEvaluator evaluator = new AverageAbsoluteDifferenceRecommenderEvaluator();
-      FastByIDMap<PreferenceArray> usersData = usersData();
-      DataModel model = new GenericDataModel(usersData);
-
-      double evaluation = evaluator.evaluate(new CrossingRecommenderBuilder(),
-              null,
-              model,
-              1,
-              0.5);
-      log.info(String.valueOf(evaluation));
-   }
-
-   @Test
-   public void testTwo() throws TasteException {
-      RecommenderIRStatsEvaluator evaluator = new GenericRecommenderIRStatsEvaluator();
-      FastByIDMap<PreferenceArray> usersData = usersData();
-      DataModel model = new GenericDataModel(usersData);
-
-      IRStatistics evaluation = evaluator.evaluate(
-              new CrossingBooleanRecommenderBuilder(),
-              new CrossingDataModelBuilder(),
-              model,
-              null,
-              2,
-              Double.NEGATIVE_INFINITY,
-              0.5);
-
-      log.info(String.valueOf(evaluation));
-   }
 
    @Test
    public void testRecommendation() throws TasteException {
@@ -75,32 +27,113 @@ public class BasicTest extends UnitTest {
       fail();
    }
 
-   @Test
-   public void testNewUserNotInData() throws TasteException {
-      int howMany = 4;
-      List<RecommendedItem> recommendation = Reco._internalRecommend(howMany, UNKNOW_USER, usersData());
-      assertTrue(recommendation.size() == 0);
-   }
+   private static FastByIDMap<PreferenceArray> usersData() {
+      FastByIDMap<PreferenceArray> result = new FastByIDMap<PreferenceArray>();
 
-   @Test
-   public void testNewUserInData() throws TasteException {
-      int howMany = 4;
-      List<RecommendedItem> recommendation = Reco._internalRecommend(howMany, USER_10, usersData());
-      assertTrue(recommendation.size() == 0);
-   }
+      // User 1
+      BooleanUserPreferenceArray preferenceArray = new BooleanUserPreferenceArray(5);
+      preferenceArray.setUserID(0, USER_1);
+      preferenceArray.setItemID(0, ITEM_1);
+      preferenceArray.setItemID(1, ITEM_2);
+      preferenceArray.setItemID(2, ITEM_3);
+      preferenceArray.setItemID(3, ITEM_4);
+      preferenceArray.setItemID(4, ITEM_5);
+      result.put(USER_1, preferenceArray);
 
-   @Test
-   public void testUserWithOnlyOnePref() throws TasteException {
-      int howMany = 4;
-      List<RecommendedItem> recommendation = Reco._internalRecommend(howMany, USER_11, usersData());
-      assertTrue(recommendation.size() == howMany);
-   }
+      // User 2
+      preferenceArray = new BooleanUserPreferenceArray(5);
+      preferenceArray.setUserID(0, USER_2);
+      preferenceArray.setItemID(0, ITEM_9);
+      preferenceArray.setItemID(1, ITEM_6);
+      preferenceArray.setItemID(2, ITEM_7);
+      preferenceArray.setItemID(3, ITEM_8);
+      preferenceArray.setItemID(4, ITEM_10);
+      result.put(USER_2, preferenceArray);
 
-   @Test
-   public void testUserWithOnlyOneUniquePref() throws TasteException {
-      int howMany = 4;
-      List<RecommendedItem> recommendation = Reco._internalRecommend(howMany, USER_12, usersData());
-      assertTrue(recommendation.size() == 0);
+      // User 3
+      preferenceArray = new BooleanUserPreferenceArray(5);
+      preferenceArray.setUserID(0, USER_3);
+      preferenceArray.setItemID(0, ITEM_1);
+      preferenceArray.setItemID(1, ITEM_2);
+      preferenceArray.setItemID(2, ITEM_3);
+      preferenceArray.setItemID(3, ITEM_4);
+      preferenceArray.setItemID(4, ITEM_9);
+      result.put(USER_3, preferenceArray);
+
+
+      // User 4
+      preferenceArray = new BooleanUserPreferenceArray(5);
+      preferenceArray.setUserID(0, USER_4);
+      preferenceArray.setItemID(0, ITEM_1);
+      preferenceArray.setItemID(1, ITEM_2);
+      preferenceArray.setItemID(2, ITEM_3);
+      preferenceArray.setItemID(3, ITEM_5);
+      preferenceArray.setItemID(4, ITEM_9);
+      result.put(USER_4, preferenceArray);
+
+      // User 5
+      preferenceArray = new BooleanUserPreferenceArray(5);
+      preferenceArray.setUserID(0, USER_5);
+      preferenceArray.setItemID(0, ITEM_5);
+      preferenceArray.setItemID(1, ITEM_6);
+      preferenceArray.setItemID(2, ITEM_7);
+      preferenceArray.setItemID(3, ITEM_10);
+      preferenceArray.setItemID(4, ITEM_11);
+      result.put(USER_5, preferenceArray);
+
+      // User 6
+      preferenceArray = new BooleanUserPreferenceArray(5);
+      preferenceArray.setUserID(0, USER_6);
+      preferenceArray.setItemID(0, ITEM_1);
+      preferenceArray.setItemID(1, ITEM_2);
+      preferenceArray.setItemID(2, ITEM_3);
+      preferenceArray.setItemID(3, ITEM_6);
+      preferenceArray.setItemID(4, ITEM_7);
+      result.put(USER_6, preferenceArray);
+
+
+      // User 7
+      preferenceArray = new BooleanUserPreferenceArray(5);
+      preferenceArray.setUserID(0, USER_7);
+      preferenceArray.setItemID(0, ITEM_1);
+      preferenceArray.setItemID(1, ITEM_2);
+      preferenceArray.setItemID(2, ITEM_3);
+      preferenceArray.setItemID(3, ITEM_10);
+      preferenceArray.setItemID(4, ITEM_11);
+      result.put(USER_7, preferenceArray);
+
+      // User 8
+      preferenceArray = new BooleanUserPreferenceArray(5);
+      preferenceArray.setUserID(0, USER_8);
+      preferenceArray.setItemID(0, ITEM_5);
+      preferenceArray.setItemID(1, ITEM_6);
+      preferenceArray.setItemID(2, ITEM_7);
+      preferenceArray.setItemID(3, ITEM_10);
+      preferenceArray.setItemID(4, ITEM_11);
+      result.put(USER_8, preferenceArray);
+
+      // User 9
+      preferenceArray = new BooleanUserPreferenceArray(5);
+      preferenceArray.setUserID(0, USER_9);
+      preferenceArray.setItemID(0, ITEM_1);
+      preferenceArray.setItemID(1, ITEM_2);
+      preferenceArray.setItemID(2, ITEM_3);
+      preferenceArray.setItemID(3, ITEM_5);
+      preferenceArray.setItemID(4, ITEM_9);
+      result.put(USER_9, preferenceArray);
+
+
+      // User 10
+      preferenceArray = new BooleanUserPreferenceArray(5);
+      preferenceArray.setUserID(0, USER_10);
+      preferenceArray.setItemID(0, ITEM_1);
+      preferenceArray.setItemID(1, ITEM_2);
+      preferenceArray.setItemID(2, ITEM_3);
+      preferenceArray.setItemID(3, ITEM_7);
+      preferenceArray.setItemID(4, ITEM_9);
+      result.put(USER_10, preferenceArray);
+
+      return result;
    }
 
    static final Long ITEM_1 = 10l;
@@ -115,143 +148,15 @@ public class BasicTest extends UnitTest {
    static final Long ITEM_10 = 100l;
    static final Long ITEM_11 = 110l;
 
-   private static FastByIDMap<PreferenceArray> usersData() {
-      FastByIDMap<PreferenceArray> result = new FastByIDMap<PreferenceArray>();
-
-      // User 0
-      BooleanUserPreferenceArray preferenceArray = new BooleanUserPreferenceArray(5);
-      Long userId = USER_1;
-      preferenceArray.setUserID(0, userId);
-      preferenceArray.setItemID(0, ITEM_1);
-      preferenceArray.setItemID(1, ITEM_2);
-      preferenceArray.setItemID(2, ITEM_3);
-      preferenceArray.setItemID(3, ITEM_4);
-      preferenceArray.setItemID(4, ITEM_5);
-      result.put(userId, preferenceArray);
-
-      // User 1
-      preferenceArray = new BooleanUserPreferenceArray(5);
-      userId = 1l;
-      preferenceArray.setUserID(0, userId);
-      preferenceArray.setItemID(0, ITEM_9);
-      preferenceArray.setItemID(1, ITEM_6);
-      preferenceArray.setItemID(2, ITEM_7);
-      preferenceArray.setItemID(3, ITEM_8);
-      preferenceArray.setItemID(4, ITEM_10);
-      result.put(userId, preferenceArray);
-
-      // User 2
-      preferenceArray = new BooleanUserPreferenceArray(5);
-      userId = 2l;
-      preferenceArray.setUserID(0, userId);
-      preferenceArray.setItemID(0, ITEM_1);
-      preferenceArray.setItemID(1, ITEM_2);
-      preferenceArray.setItemID(2, ITEM_3);
-      preferenceArray.setItemID(3, ITEM_4);
-      preferenceArray.setItemID(4, ITEM_9);
-      result.put(userId, preferenceArray);
-
-
-      // User 3
-      preferenceArray = new BooleanUserPreferenceArray(5);
-      userId = 3l;
-      preferenceArray.setUserID(0, userId);
-      preferenceArray.setItemID(0, ITEM_1);
-      preferenceArray.setItemID(1, ITEM_2);
-      preferenceArray.setItemID(2, ITEM_3);
-      preferenceArray.setItemID(3, ITEM_5);
-      preferenceArray.setItemID(4, ITEM_9);
-      result.put(userId, preferenceArray);
-
-      // User 4
-      preferenceArray = new BooleanUserPreferenceArray(5);
-      userId = 4l;
-      preferenceArray.setUserID(0, userId);
-      preferenceArray.setItemID(0, ITEM_5);
-      preferenceArray.setItemID(1, ITEM_6);
-      preferenceArray.setItemID(2, ITEM_7);
-      preferenceArray.setItemID(3, ITEM_10);
-      preferenceArray.setItemID(4, ITEM_11);
-      result.put(userId, preferenceArray);
-
-      // User 5
-      preferenceArray = new BooleanUserPreferenceArray(5);
-      userId = 5l;
-      preferenceArray.setUserID(0, userId);
-      preferenceArray.setItemID(0, ITEM_1);
-      preferenceArray.setItemID(1, ITEM_2);
-      preferenceArray.setItemID(2, ITEM_3);
-      preferenceArray.setItemID(3, ITEM_6);
-      preferenceArray.setItemID(4, ITEM_7);
-      result.put(userId, preferenceArray);
-
-
-      // User 6
-      preferenceArray = new BooleanUserPreferenceArray(5);
-      userId = 6l;
-      preferenceArray.setUserID(0, userId);
-      preferenceArray.setItemID(0, ITEM_1);
-      preferenceArray.setItemID(1, ITEM_2);
-      preferenceArray.setItemID(2, ITEM_3);
-      preferenceArray.setItemID(3, ITEM_10);
-      preferenceArray.setItemID(4, ITEM_11);
-      result.put(userId, preferenceArray);
-
-      // User 7
-      preferenceArray = new BooleanUserPreferenceArray(5);
-      userId = 7l;
-      preferenceArray.setUserID(0, userId);
-      preferenceArray.setItemID(0, ITEM_5);
-      preferenceArray.setItemID(1, ITEM_6);
-      preferenceArray.setItemID(2, ITEM_7);
-      preferenceArray.setItemID(3, ITEM_10);
-      preferenceArray.setItemID(4, ITEM_11);
-      result.put(userId, preferenceArray);
-
-      // User 8
-      preferenceArray = new BooleanUserPreferenceArray(5);
-      userId = 8l;
-      preferenceArray.setUserID(0, userId);
-      preferenceArray.setItemID(0, ITEM_1);
-      preferenceArray.setItemID(1, ITEM_2);
-      preferenceArray.setItemID(2, ITEM_3);
-      preferenceArray.setItemID(3, ITEM_5);
-      preferenceArray.setItemID(4, ITEM_9);
-      result.put(userId, preferenceArray);
-
-
-      // User 9
-      preferenceArray = new BooleanUserPreferenceArray(5);
-      userId = 9l;
-      preferenceArray.setUserID(0, userId);
-      preferenceArray.setItemID(0, ITEM_1);
-      preferenceArray.setItemID(1, ITEM_2);
-      preferenceArray.setItemID(2, ITEM_3);
-      preferenceArray.setItemID(3, ITEM_7);
-      preferenceArray.setItemID(4, ITEM_9);
-      result.put(userId, preferenceArray);
-
-      // User 10
-      preferenceArray = new BooleanUserPreferenceArray(0);
-      userId = USER_10;
-      preferenceArray.setUserID(0, userId);
-      result.put(userId, preferenceArray);
-
-      // User 11
-      preferenceArray = new BooleanUserPreferenceArray(1);
-      userId = USER_11;
-      preferenceArray.setUserID(0, userId);
-      preferenceArray.setItemID(0, ITEM_1);
-      result.put(userId, preferenceArray);
-
-      // User 12 // no one as this pref
-      preferenceArray = new BooleanUserPreferenceArray(1);
-      userId = USER_12;
-      preferenceArray.setUserID(0, userId);
-      preferenceArray.setItemID(0, 999l);
-      result.put(userId, preferenceArray);
-
-      return result;
-   }
+   static final long USER_1 = 0l;
+   static final long USER_2 = 1l;
+   static final long USER_3 = 2l;
+   static final long USER_4 = 3l;
+   static final long USER_5 = 4l;
+   static final long USER_6 = 5l;
+   static final long USER_7 = 6l;
+   static final long USER_8 = 7l;
+   static final long USER_9 = 8l;
+   static final long USER_10 = 9l;
 
 }

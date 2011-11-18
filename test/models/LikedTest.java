@@ -1,16 +1,14 @@
 package models;
 
 
-
-import java.util.ArrayList;
-import java.util.HashSet;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import play.test.UnitTest;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class LikedTest extends UnitTest {
    private static final Logger log = LoggerFactory.getLogger(LikedTest.class);

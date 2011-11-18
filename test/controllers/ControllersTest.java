@@ -1,17 +1,16 @@
 package controllers;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.junit.Before;
 import org.junit.BeforeClass;
-
 import play.Play;
 import play.libs.Crypto;
 import play.mvc.Http;
 import play.test.Fixtures;
 import play.test.FunctionalTest;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Jean-Baptiste lemée

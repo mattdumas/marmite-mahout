@@ -1,14 +1,8 @@
 package controllers;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import models.Liked;
-import play.mvc.Http;
 import play.mvc.Http.Response;
 
 public class ApplicationTest extends ControllersTest {
