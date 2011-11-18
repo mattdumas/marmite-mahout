@@ -32,7 +32,7 @@ Nous allons améliorer le site pour découvrir de nouvelles recettes en fonction
 
 * Tapez `play eclipsify` ou `play idealize` à la racine du projet pour créer le projet pour votre IDE de prédilection.
 * Ouvrez votre IDE
-* Ouvrez le projet.
+* Ouvrez le projet créé avec Play!.
 
 
 Etape 1
@@ -53,7 +53,7 @@ Maintenant il s'agit de faire passer le test que nous venons d'écrire !
 Pour cela, nous allons écrire le corps de la méthode Reco._internalRecommend
 
 * Apache mahout propose l'interface : org.apache.mahout.cf.taste.recommender.Recommender
-ainsi que de nombreuses implementation listées dans le package : org.apache.mahout.cf.taste.impl.recommender
+ainsi que de nombreuses implementations listées dans le package : org.apache.mahout.cf.taste.impl.recommender
 
 * Choisissez celle qui vous semble la plus adaptées à votre test et tester !
 
@@ -76,12 +76,12 @@ Etape 3
 Etape 4
 ----------------
 S'il vous reste du temps, plusieurs améliration sont possibles :
-- Recommander des utilisateurs (Très facile)
-- Noter les recettes et se servir de la note pour affiner le système (Facile)
-- Utiliser ItemSimilarity pour recommander à partir de similarité entre recette (Difficile). Idée : Utiliser Lucene et l'auteur de la recette pour calculer les similarités
+* Recommander des utilisateurs (Très facile)
+* Noter les recettes et se servir de la note pour affiner le système (Facile)
+* Utiliser ItemSimilarity pour recommander à partir de similarité entre recette (Difficile). Idée : Utiliser Lucene et l'auteur de la recette pour calculer les similarités
 
 * Ecrivez au moins un test unitaire comme nous l'avons fait pour l'étape 1.
-* implementez le controleur sur le même modèle que Reco._internalRecommend
+* Implementez le controleur sur le même modèle que Reco._internalRecommend
 * C'est fini ! Vous pouvez vous amuser à écrire la partie web cliente si il vous reste du temps et du courage !
 
 
@@ -90,7 +90,7 @@ Tips
 * Pour lancer les tests play! `play autotest`
 * En cas de blocage : Demandez nous ! ou tricher en allant sur github: regardez la liste des commits, certains sont libellés "Etapes X" et vous donnerons des pistes.
 * Vous pouvez vous inspirer des fichiers .bashrc et .gitconfig ici : https://github.com/jblemee/config
-pour avoir un meilleur environnement de dévelopement sous git.
+pour avoir un meilleur environnement de développement sous git.
 * Ne perdez pas de temps avec Play! et Git : demandez nous les commandes et prévenez nous si vous avez un blocage.
 
 
